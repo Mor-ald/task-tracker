@@ -1,0 +1,68 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Задача 1",
+      "description": "Описание задачи 1",
+      "status": "to-do",
+      "type": "task",
+      "priority": "low",
+      "created": "31-01-2025",
+      "deadline": "12-02-2025",
+      "tags": [
+        {
+          "name": "Моя первая задача",
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Задача 2",
+      "description": "Описание задачи 2",
+      "status": "in-progress",
+      "type": "task",
+      "priority": "low",
+      "created": "02-02-2025",
+      "deadline": "15-02-2025",
+      "tags": [
+        {
+          "name": "задача 2",
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Задача 3",
+      "description": "Описание задачи 3",
+      "status": "test",
+      "type": "task",
+      "priority": "low",
+      "created": "02-02-2025",
+      "deadline": "15-02-2025",
+      "tags": [
+        {
+          "name": "задача 3",
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Задача 4",
+      "description": "Описание задачи 4",
+      "status": "closed",
+      "type": "task",
+      "priority": "low",
+      "created": "02-02-2025",
+      "deadline": "15-02-2025",
+      "tags": [
+        {
+          "name": "задача 4",
+          "color": "#000000"
+        }
+      ]
+    }
+  ]
+}
