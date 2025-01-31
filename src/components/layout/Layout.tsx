@@ -1,5 +1,7 @@
-const Layout = () => {
-  return <></>;
-};
+import styles from './Layout.module.css';
 
-export default Layout;
+import { ReactNode } from 'react';
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return <div className={styles['layout']}>{children}</div>;
+}
