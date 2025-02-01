@@ -1,9 +1,17 @@
 .tab-title {
   display: flex;
   justify-content: space-between;
+
+  :first-child {
+    font-weight: bold;
+  }
 }
 
 .tab-content {
   display: flex;
   flex-direction: column;
+}
+
+.tab-buttons {
+  display: flex;
 }
