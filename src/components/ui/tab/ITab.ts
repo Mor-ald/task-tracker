@@ -1,10 +1,10 @@
-import { Tasks } from '@/types/Tasks';
+import { TaskStatus } from '@/types/Tasks';
 
 /**
  * Tab component props
  */
 export default interface ITab {
   title: string;
-  data: Tasks;
+  status: TaskStatus;
   createTaskButtonVisible: boolean;
 }
