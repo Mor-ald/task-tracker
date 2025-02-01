@@ -16,3 +16,10 @@
     font-weight: 500;
   }
 }
+
+.project-tasks {
+  display: grid;
+  column-gap: 24px;
+  grid-template-columns: repeat(4, minmax(320px, 1fr));
+  margin-top: 2rem;
+}
