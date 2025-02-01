@@ -1,0 +1,19 @@
+.project-info {
+  display: grid;
+  column-gap: 24px;
+  grid-template-columns: 280px auto 220px;
+}
+
+.info-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  :last-child {
+    grid-template-columns: 2fr 1fr;
+    text-align: right;
+  }
+
+  > div:first-child {
+    font-weight: 600;
+  }
+}
