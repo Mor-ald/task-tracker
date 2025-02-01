@@ -15,19 +15,21 @@ export default function Tab({ title, status, createTaskButtonVisible }: ITab) {
   const { data, isLoading } = useGetTaskByStatusQuery(status);
 
   return (
-    <Container>
-      <div className={styles['tab-title']}>
-        <div>{title}</div>
-        <div className={styles['tab-buttons']}>
-          {createTaskButtonVisible && <PlusButton />}
-          {<MenuButton />}
+    <div className={styles['tab']}>
+      <Container>
+        <div className={styles['tab-title']}>
+          <div>{title}</div>
+          <div className={styles['tab-buttons']}>
+            {createTaskButtonVisible && <PlusButton />}
+            {<MenuButton />}
+          </div>
         </div>
-      </div>
-      {!isLoading && (
-        <div className={styles['tab-content']}>
-          {data && data.map((task) => <Task taskData={task} />)}
-        </div>
-      )}
-    </Container>
+        {!isLoading && (
+          <div className={styles['tab-content']}>
+            {data && data.map((task) => <Task taskData={task} />)}
+          </div>
+        )}
+      </Container>
+    </div>
   );
 }
