@@ -20,7 +20,7 @@ export default function Tab({ title, status, createTaskButtonVisible }: ITab) {
         <div>{title}</div>
         <div className={styles['tab-buttons']}>
           {createTaskButtonVisible && <PlusButton />}
-          {createTaskButtonVisible && <MenuButton />}
+          {<MenuButton />}
         </div>
       </div>
       {!isLoading && (
