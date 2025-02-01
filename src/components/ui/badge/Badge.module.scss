@@ -1,0 +1,27 @@
+.badge {
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.5rem;
+  font-weight: 400;
+  line-height: 143%;
+  color: #fff;
+}
+
+.badge-error {
+  background: var(--error-color);
+}
+
+.badge-success {
+  background: var(--success-color);
+}
+
+.badge-info {
+  background: var(--info-color);
+}
+
+.badge-warning {
+  background: var(--warning-color);
+}
+
+.badge-secondary {
+  background: var(--secondary-color);
+}
