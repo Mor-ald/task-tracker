@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 1rem 1.5rem;
-  background-color: #e0e4ea;
+  background-color: var(--background-task);
 }
 
 .task-header {
@@ -17,7 +17,7 @@
 
 .task-description {
   margin-bottom: 0.6rem;
-  color: #5e6575;
+  color: var(--description-task);
 }
 
 .task-created,
@@ -26,6 +26,6 @@
   grid-template-columns: 1fr 1fr;
 
   :first-child {
-    color: #6c6c6c;
+    color: var(--primary-text-task);
   }
 }
