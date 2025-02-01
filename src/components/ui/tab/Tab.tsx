@@ -2,18 +2,32 @@ import styles from './Tab.module.scss';
 import ITab from './ITab';
 
 import Container from '../container/Container';
+import Task from '../task/Task';
+import PlusButton from '../button/plus-button/PlusButton';
+import MenuButton from '../button/menu-button/MenuButton';
+
+import { useGetTaskByStatusQuery } from '@/services/api/tasksApi';
 
 /**
  * Tab component
  */
-export default function Tab({ title, data, createTaskButtonVisible }: ITab) {
+export default function Tab({ title, status, createTaskButtonVisible }: ITab) {
+  const { data, isLoading } = useGetTaskByStatusQuery(status);
+
   return (
     <Container>
       <div className={styles['tab-title']}>
         <div>{title}</div>
-        <div></div>
+        <div className={styles['tab-buttons']}>
+          {createTaskButtonVisible && <PlusButton />}
+          {createTaskButtonVisible && <MenuButton />}
+        </div>
       </div>
-      <div className={styles['tab-content']}></div>
+      {!isLoading && (
+        <div className={styles['tab-content']}>
+          {data && data.map((task) => <Task taskData={task} />)}
+        </div>
+      )}
     </Container>
   );
 }
