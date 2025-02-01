@@ -1,22 +1,29 @@
 .task {
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
+  border-radius: 1rem;
   padding: 1rem 1.5rem;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 20%);
+  font-size: 0.75rem;
   background-color: var(--background-task);
 }
 
 .task-header {
   display: flex;
-  margin-bottom: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
 }
 
 .task-title {
-  margin-right: 0.6rem;
+  margin-right: 0.3rem;
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .task-description {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.3rem;
   color: var(--description-task);
 }
 
@@ -24,8 +31,26 @@
 .task-deadline {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 0.1rem;
 
   :first-child {
     color: var(--primary-text-task);
   }
+
+  :last-child {
+    text-align: right;
+  }
+}
+
+.task-deadline {
+  margin-bottom: 0.4rem;
+}
+
+.task-text {
+  margin-bottom: 0.2rem;
+}
+
+.task-tags {
+  display: flex;
+  font-size: 0.6rem;
 }
