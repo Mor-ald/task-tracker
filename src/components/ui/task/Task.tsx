@@ -1,6 +1,8 @@
 import styles from './Task.module.scss';
 import ITask from './ITask';
 
+import Badge from '../badge/Badge';
+
 /**
  * Task component
  */
