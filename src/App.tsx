@@ -1,9 +1,13 @@
 import Layout from './components/layout/Layout';
 import Container from './components/ui/container/Container';
+import Tab from './components/ui/tab/Tab';
+import { useGetTasksQuery } from './services/api/tasksApi';
 
-const App = () => {
+export default function App() {
+  const { data, isLoading } = useGetTasksQuery();
   return (
     <Layout>
+      {/* Project info */}
       <h2>Project Name</h2>
       <div className="project-info">
         <Container>
@@ -27,20 +31,38 @@ const App = () => {
         <Container>
           <div className="info-item">
             <div>All tasks:</div>
-            <div>4</div>
+            {isLoading ? <div>0</div> : <div>{data!.length}</div>}
           </div>
           <div className="info-item">
             <div>Closed:</div>
-            <div>1</div>
+            {isLoading ? (
+              <div>0</div>
+            ) : (
+              <div>{data!.filter((t) => t.status === 'closed').length}</div>
+            )}
           </div>
           <div className="info-item">
             <div>In progress:</div>
-            <div>1</div>
+            {isLoading ? (
+              <div>0</div>
+            ) : (
+              <div>{data!.filter((t) => t.status === 'in-progress').length}</div>
+            )}
           </div>
         </Container>
       </div>
+
+      {/* Tasks */}
+      <div className="project-tasks">
+        {/* Todo tasks */}
+        <Tab title="To-do" status={'to-do'} createTaskButtonVisible={true} />
+        {/* Todo tasks */}
+        <Tab title="In-progress" status={'in-progress'} createTaskButtonVisible={true} />
+        {/* Todo tasks */}
+        <Tab title="Test" status={'test'} createTaskButtonVisible={true} />
+        {/* Todo tasks */}
+        <Tab title="Closed" status={'closed'} createTaskButtonVisible={true} />
+      </div>
     </Layout>
   );
-};
-
-export default App;
+}
