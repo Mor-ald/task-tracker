@@ -8,34 +8,34 @@ const App = () => {
       <div className="project-info">
         <Container>
           <div className="info-item">
-            <span>Date added:</span>
-            <span>31.01.2025</span>
+            <div>Date added:</div>
+            <div>31.01.2025</div>
           </div>
           <div className="info-item">
-            <span>Deadline:</span>
-            <span>3.02.2025</span>
+            <div>Deadline:</div>
+            <div>03.02.2025</div>
           </div>
           <div className="info-item">
-            <span>Participants:</span>
-            <span>Alexey</span>
+            <div>Participants:</div>
+            <div>Alexey</div>
           </div>
         </Container>
         <Container>
-          Менеджер для внутреннего пользования, предназначенный для учета статистики и трекинга
-          задач.
+          Трекер задач, созданный на React с использованием стейт-менеджера Redux (redux Toolkit,
+          RTK Query) с фичей Drag and Drop.
         </Container>
         <Container>
           <div className="info-item">
-            <span>All tasks:</span>
-            <span>4</span>
+            <div>All tasks:</div>
+            <div>4</div>
           </div>
           <div className="info-item">
-            <span>Closed:</span>
-            <span>1</span>
+            <div>Closed:</div>
+            <div>1</div>
           </div>
           <div className="info-item">
-            <span>In progress:</span>
-            <span>1</span>
+            <div>In progress:</div>
+            <div>1</div>
           </div>
         </Container>
       </div>
