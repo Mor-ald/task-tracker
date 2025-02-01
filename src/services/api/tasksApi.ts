@@ -9,7 +9,7 @@ export const tasksApi = createApi({
   reducerPath: 'tasksApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
   endpoints: (builder) => ({
-    getTasks: builder.query<Tasks, string>({
+    getTasks: builder.query<Tasks, void>({
       query: () => `tasks`,
     }),
     getTaskByStatus: builder.query<Tasks, string>({
