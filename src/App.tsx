@@ -56,12 +56,12 @@ export default function App() {
       <div className="project-tasks">
         {/* Todo tasks */}
         <Tab title="To-do" status={'to-do'} createTaskButtonVisible={true} />
-        {/* Todo tasks */}
-        <Tab title="In-progress" status={'in-progress'} createTaskButtonVisible={true} />
-        {/* Todo tasks */}
-        <Tab title="Test" status={'test'} createTaskButtonVisible={true} />
-        {/* Todo tasks */}
-        <Tab title="Closed" status={'closed'} createTaskButtonVisible={true} />
+        {/* In-progress tasks */}
+        <Tab title="In-progress" status={'in-progress'} createTaskButtonVisible={false} />
+        {/* Test tasks */}
+        <Tab title="Test" status={'test'} createTaskButtonVisible={false} />
+        {/* Closed tasks */}
+        <Tab title="Closed" status={'closed'} createTaskButtonVisible={false} />
       </div>
     </Layout>
   );
