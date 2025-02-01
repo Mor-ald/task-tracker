@@ -12,6 +12,9 @@ export const tasksApi = createApi({
     getTasks: builder.query<Tasks, string>({
       query: () => `tasks`,
     }),
+    getTaskByStatus: builder.query<Tasks, string>({
+      query: (status) => `tasks?status=${status}`,
+    }),
     addTask: builder.mutation<Tasks, Task>({
       query: (task) => ({
         url: `tasks`,
@@ -29,4 +32,9 @@ export const tasksApi = createApi({
   }),
 });
 
-export const { useGetTasksQuery, useAddTaskMutation, useUpdateTaskMutation } = tasksApi;
+export const {
+  useGetTasksQuery,
+  useGetTaskByStatusQuery,
+  useAddTaskMutation,
+  useUpdateTaskMutation,
+} = tasksApi;
