@@ -3,17 +3,20 @@ import styles from './PlusButton.module.scss';
 import PlusCircleIcon from '../../icons/PlusCircleIcon';
 import { onSetNewCurrentTitle, toggleSideBar } from '../../sidebar/SideBarSlice';
 
-import { useAppDispatch } from '@/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 
 /**
  * Plus button component
  */
 export default function PlusButton() {
   const dispatch = useAppDispatch();
+  const open = useAppSelector((store) => store.sidebar.open);
 
   const onClick = () => {
-    dispatch(onSetNewCurrentTitle({ title: 'Новая задача' }));
-    dispatch(toggleSideBar());
+    if (!open) {
+      dispatch(onSetNewCurrentTitle({ title: 'Новая задача' }));
+      dispatch(toggleSideBar());
+    }
   };
 
   return (
