@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import sideBarReducer from '@/components/ui/sidebar/SideBarSlice';
+import taskFormReducer from '@/components/ui/task-form/TaskFormSlice';
 import { tasksApi } from '@/services/api/tasksApi';
 
 /**
@@ -10,6 +11,7 @@ import { tasksApi } from '@/services/api/tasksApi';
 export const store = configureStore({
   reducer: {
     sidebar: sideBarReducer,
+    formTask: taskFormReducer,
     [tasksApi.reducerPath]: tasksApi.reducer,
   },
 
