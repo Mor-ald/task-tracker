@@ -4,12 +4,13 @@
   top: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   padding: 1rem 2rem;
   width: 500px;
   height: 100vh;
   box-shadow: -2px 0 10px -2px rgba(0, 0, 0, 30%);
   box-sizing: border-box;
-  background: #fff;
+  background: var(--background-gray);
   transition: 0.2s all ease;
 }
 
@@ -17,4 +18,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 1.25rem;
+}
+
+.sidebar-content {
+  flex-grow: 1;
 }
