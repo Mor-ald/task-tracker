@@ -1,7 +1,7 @@
 import styles from './PlusButton.module.scss';
 
 import PlusCircleIcon from '../../icons/PlusCircleIcon';
-import { toggleSideBar } from '../../sidebar/SideBarSlice';
+import { onSetNewCurrentTitle, toggleSideBar } from '../../sidebar/SideBarSlice';
 
 import { useAppDispatch } from '@/hooks/hooks';
 
@@ -10,8 +10,14 @@ import { useAppDispatch } from '@/hooks/hooks';
  */
 export default function PlusButton() {
   const dispatch = useAppDispatch();
+
+  const onClick = () => {
+    dispatch(onSetNewCurrentTitle({ title: 'Новая задача' }));
+    dispatch(toggleSideBar());
+  };
+
   return (
-    <div className={styles['button']} onClick={() => dispatch(toggleSideBar())}>
+    <div className={styles['button']} onClick={onClick}>
       <PlusCircleIcon />
     </div>
   );
