@@ -25,12 +25,10 @@ export type Task = {
   priority: TaskPriority;
   created: string;
   deadline: string | null;
-  tags: [
-    {
-      name: string;
-      color: string;
-    },
-  ];
+  tags: {
+    name: string;
+    color: string;
+  }[];
 };
 
 /**
