@@ -18,13 +18,15 @@ import { toggleSideBar } from '../sidebar/SideBarSlice';
 import { useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
-import { useAddTaskMutation } from '@/services/api/tasksApi';
+import { useAddTaskMutation, useUpdateTaskMutation } from '@/services/api/tasksApi';
 import createDate from '@/utils/createDate';
 
 export default function TaskForm() {
   const dispatch = useAppDispatch();
-  const { task, currentTagToAdd } = useAppSelector((store) => store.formTask);
-  const [addTask, { isError, error }] = useAddTaskMutation();
+  const [addTask] = useAddTaskMutation();
+  const [updateTask] = useUpdateTaskMutation();
+
+  const { mode, task, currentTagToAdd } = useAppSelector((store) => store.formTask);
   const minDeadLineDate = createDate(new Date()).split('-').reverse().join('-');
 
   const addNewTask = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,19 +36,34 @@ export default function TaskForm() {
       title: task.title,
       description: task.description,
       type: task.type,
-      status: 'to-do',
-      created: createDate(new Date()),
+      status: task.status,
+      created: task.created ? task.created : createDate(new Date()),
       deadline: task.deadline ? task.deadline.split('-').reverse().join('-') : null,
       priority: task.priority,
       tags: task.tags,
     });
 
-    if (isError) {
-      console.log(error);
-    } else {
-      dispatch(onClearTask());
-      dispatch(toggleSideBar());
-    }
+    dispatch(onClearTask());
+    dispatch(toggleSideBar());
+  };
+
+  const updateCurrentTask = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    updateTask({
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      type: task.type,
+      status: task.status,
+      created: task.created,
+      deadline: task.deadline ? task.deadline.split('-').reverse().join('-') : null,
+      priority: task.priority,
+      tags: task.tags,
+    });
+
+    dispatch(onClearTask());
+    dispatch(toggleSideBar());
   };
 
   const addNewTag = () => {
@@ -76,7 +93,7 @@ export default function TaskForm() {
 
   return (
     <div className={styles['task-form']}>
-      <form onSubmit={(e) => addNewTask(e)}>
+      <form onSubmit={(e) => (mode === 'add' ? addNewTask(e) : updateCurrentTask(e))}>
         <div>
           <div className={styles['task-block']}>
             <label htmlFor="task-title">Название задачи</label>
@@ -180,7 +197,7 @@ export default function TaskForm() {
           </div>
         </div>
 
-        <button type="submit">Создать задачу</button>
+        <button type="submit">Сохранить</button>
       </form>
     </div>
   );
