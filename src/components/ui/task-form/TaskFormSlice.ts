@@ -36,14 +36,12 @@ export const taskFromSlice = createSlice({
       state.task = initialStateTask;
     },
     onChangeTitle: (state, action) => {
-      console.log(action);
       state.task.title = action.payload.title;
     },
     onChangeDescription: (state, action) => {
       state.task.description = action.payload.description;
     },
     onChangeType: (state, action) => {
-      console.log(action);
       state.task.type = action.payload.type;
     },
     onChangePriority: (state, action) => {
@@ -72,6 +70,7 @@ export const taskFromSlice = createSlice({
 });
 
 export const {
+  onSetMode,
   onSetTask,
   onClearTask,
   onChangeTitle,
