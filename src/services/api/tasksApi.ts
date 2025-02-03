@@ -38,7 +38,15 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: [{ type: 'Tasks', id: 'LIST' }],
     }),
-    updateTask: builder.mutation<Tasks, Pick<Task, 'id' | 'status'>>({
+    updateTask: builder.mutation<Tasks, Task>({
+      query: ({ id, ...body }) => ({
+        url: `tasks/${id}`,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: [{ type: 'Tasks', id: 'LIST' }],
+    }),
+    updateStatusTask: builder.mutation<Tasks, Pick<Task, 'id' | 'status'>>({
       query: ({ id, ...patch }) => ({
         url: `tasks/${id}`,
         method: 'PATCH',
@@ -54,4 +62,5 @@ export const {
   useGetTaskByStatusQuery,
   useAddTaskMutation,
   useUpdateTaskMutation,
+  useUpdateStatusTaskMutation,
 } = tasksApi;
