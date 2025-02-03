@@ -3,7 +3,7 @@ import ITask from './ITask';
 
 import Badge from '../badge/Badge';
 import { onSetNewCurrentTitle, toggleSideBar } from '../sidebar/SideBarSlice';
-import { onSetTask } from '../task-form/TaskFormSlice';
+import { onSetMode, onSetTask } from '../task-form/TaskFormSlice';
 
 import { TaskPriority } from '@/types/Tasks';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
@@ -30,6 +30,7 @@ export default function Task({ taskData }: ITask) {
 
   const onDoubleClick = () => {
     if (!open) {
+      dispatch(onSetMode({ mode: 'edit' }));
       dispatch(onSetNewCurrentTitle({ title: 'Редактирование задачи' }));
       dispatch(
         onSetTask({
@@ -70,7 +71,7 @@ export default function Task({ taskData }: ITask) {
         </div>
       )}
 
-      {taskData.tags.length && (
+      {taskData.tags.length !== 0 && (
         <>
           <div className={styles['task-text']}>#Тэги</div>
           <div className={styles['task-tags']}>
