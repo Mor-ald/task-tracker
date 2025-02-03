@@ -66,6 +66,11 @@ export default function TaskForm() {
     dispatch(toggleSideBar());
   };
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (mode === 'add') return addNewTask(e);
+    if (mode === 'edit') return updateCurrentTask(e);
+  };
+
   const addNewTag = () => {
     if (currentTagToAdd.name && task.tags.length < 11) {
       dispatch(onAddNewTag({ name: currentTagToAdd.name, color: currentTagToAdd.color }));
@@ -93,7 +98,7 @@ export default function TaskForm() {
 
   return (
     <div className={styles['task-form']}>
-      <form onSubmit={(e) => (mode === 'add' ? addNewTask(e) : updateCurrentTask(e))}>
+      <form onSubmit={onSubmit}>
         <div>
           <div className={styles['task-block']}>
             <label htmlFor="task-title">Название задачи</label>
