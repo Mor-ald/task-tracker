@@ -40,11 +40,11 @@ export default function Tab({ title, status, createTaskButtonVisible }: ITab) {
   }, [data, isLoading]);
 
   return (
-    <div className={styles['tab']}>
-      <Container>
+    <Container>
+      <div className={styles['tab']}>
         <TabTitle />
         <Tasks />
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 }
