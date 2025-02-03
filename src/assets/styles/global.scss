@@ -19,8 +19,9 @@
 
 .project-tasks {
   display: grid;
-  column-gap: 24px;
+  column-gap: 1.5rem;
   flex: 1;
   grid-template-columns: repeat(4, minmax(320px, 1fr));
+  overflow: hidden;
   margin-top: 2rem;
 }
