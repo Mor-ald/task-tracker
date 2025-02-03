@@ -2,6 +2,7 @@ import Layout from './components/layout/Layout';
 import Container from './components/ui/container/Container';
 import Sidebar from './components/ui/sidebar/Sidebar';
 import Tab from './components/ui/tab/Tab';
+import TaskForm from './components/ui/task-form/TaskForm';
 import { useGetTasksQuery } from './services/api/tasksApi';
 
 export default function App() {
@@ -67,7 +68,7 @@ export default function App() {
         </div>
       </Layout>
       <Sidebar>
-        <p>test</p>
+        <TaskForm />
       </Sidebar>
     </>
   );
