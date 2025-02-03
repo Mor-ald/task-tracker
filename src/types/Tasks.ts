@@ -17,7 +17,7 @@ export type TaskPriority = 'low' | 'medium' | 'hard';
  * Task's data
  */
 export type Task = {
-  id: number;
+  id: string | number;
   title: string;
   description: string;
   status: TaskStatus;
