@@ -11,6 +11,7 @@ import { useAppSelector } from '@/hooks/hooks';
  */
 export default function Sidebar({ children }: { children: ReactNode }) {
   const isOpen = useAppSelector((store) => store.sidebar.open);
+  const currentTitle = useAppSelector((store) => store.sidebar.currentTitle);
 
   return (
     <div
@@ -18,7 +19,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
       style={{ transform: isOpen ? `translateX(${0})` : `translateX(${500}px)` }}
     >
       <div className={styles['sidebar-title']}>
-        <h3>Новая задача</h3>
+        <h3>{currentTitle}</h3>
         <CloseButton />
       </div>
       <div className={styles['sidebar-content']}>{children}</div>
