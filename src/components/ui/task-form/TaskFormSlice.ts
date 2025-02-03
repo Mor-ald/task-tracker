@@ -2,10 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { Task } from '@/types/Tasks';
 
-const initialStateTask: Omit<Task, 'id' | 'status'> = {
+const initialMode: 'add' | 'edit' | null = null;
+
+const initialStateTask: Task = {
+  id: 0,
   title: '',
   description: '',
   type: 'task',
+  status: 'to-do',
   priority: 'low',
   created: '',
   deadline: '',
@@ -17,15 +21,16 @@ const initialStateTag: { name: string; color: string } = { name: '', color: '#00
 export const taskFromSlice = createSlice({
   name: 'taskForm',
   initialState: {
+    mode: initialMode,
     task: initialStateTask,
     currentTagToAdd: initialStateTag,
   },
   reducers: {
+    onSetMode: (state, action) => {
+      state.mode = action.payload.mode;
+    },
     onSetTask: (state, action) => {
-      state.task = {
-        ...action.payload,
-        deadline: action.payload.deadline.split('-').reverse().join(''),
-      };
+      state.task = action.payload;
     },
     onClearTask: (state) => {
       state.task = initialStateTask;
