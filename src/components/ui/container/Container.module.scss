@@ -8,3 +8,7 @@
   box-sizing: border-box;
   background: var(--background-gray);
 }
+
+.container::-webkit-scrollbar {
+  width: 0;
+}
