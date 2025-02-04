@@ -16,13 +16,16 @@ export default function Sidebar({ children }: { children: ReactNode }) {
   return (
     <div
       className={styles['sidebar']}
-      style={{ transform: isOpen ? `translateX(${0})` : `translateX(${500}px)` }}
+      style={{ transform: isOpen ? `translateX(0)` : `translateX(500px)` }}
+      data-testid="sidebar"
     >
-      <div className={styles['sidebar-title']}>
+      <div className={styles['sidebar-title']} data-testid="sidebar-title">
         <h3>{currentTitle}</h3>
         <CloseButton />
       </div>
-      <div className={styles['sidebar-content']}>{children}</div>
+      <div className={styles['sidebar-content']} data-testid="sidebar-content">
+        {children}
+      </div>
     </div>
   );
 }
