@@ -20,7 +20,7 @@ export default function App() {
             </div>
             <div className="info-item">
               <div>Deadline:</div>
-              <div>03.02.2025</div>
+              <div>04.02.2025</div>
             </div>
             <div className="info-item">
               <div>Participants:</div>
@@ -28,8 +28,9 @@ export default function App() {
             </div>
           </Container>
           <Container>
-            Трекер задач, созданный на React с использованием стейт-менеджера Redux (redux Toolkit,
-            RTK Query) с фичей Drag and Drop.
+            Трекер задач, созданный на React с использованием стейт-менеджера Redux (redux toolkit,
+            rtk query) с фичей Drag and Drop (библиотека pragmatic-drag-and-drop) и синхронизацией с
+            локальным сервером через json-server (db.json файл).
           </Container>
           <Container>
             <div className="info-item">
@@ -67,6 +68,7 @@ export default function App() {
           <Tab title="Closed" status={'closed'} createTaskButtonVisible={false} />
         </div>
       </Layout>
+
       <Sidebar>
         <TaskForm />
       </Sidebar>
