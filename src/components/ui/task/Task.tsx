@@ -5,6 +5,10 @@ import Badge from '../badge/Badge';
 import { onSetNewCurrentTitle, toggleSideBar } from '../sidebar/SideBarSlice';
 import { onSetMode, onSetTask } from '../task-form/TaskFormSlice';
 
+import { useEffect, useRef, useState } from 'react';
+import invariant from 'tiny-invariant';
+import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+
 import { TaskPriority } from '@/types/Tasks';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 
@@ -14,6 +18,20 @@ import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 export default function Task({ taskData }: ITask) {
   const dispatch = useAppDispatch();
   const open = useAppSelector((store) => store.sidebar.open);
+  const [dragging, setDragging] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    invariant(el);
+
+    return draggable({
+      element: el,
+      getInitialData: () => ({ location, taskData }),
+      onDragStart: () => setDragging(true),
+      onDrop: () => setDragging(false),
+    });
+  }, [taskData]);
 
   const getColor = (priority: TaskPriority) => {
     switch (priority) {
@@ -34,17 +52,10 @@ export default function Task({ taskData }: ITask) {
       dispatch(onSetNewCurrentTitle({ title: 'Редактирование задачи' }));
       dispatch(
         onSetTask({
-          id: taskData.id,
-          title: taskData.title,
-          description: taskData.description,
-          type: taskData.type,
-          status: taskData.status,
-          priority: taskData.priority,
-          created: taskData.created,
+          ...taskData,
           deadline: taskData.deadline
             ? taskData.deadline.split('-').reverse().join('-')
             : taskData.deadline,
-          tags: taskData.tags,
         }),
       );
       dispatch(toggleSideBar());
@@ -52,7 +63,11 @@ export default function Task({ taskData }: ITask) {
   };
 
   return (
-    <div className={styles['task']} onDoubleClick={onDoubleClick}>
+    <div
+      className={styles[dragging ? 'task-dragging' : 'task']}
+      ref={ref}
+      onDoubleClick={onDoubleClick}
+    >
       <div className={styles['task-header']}>
         <span className={styles['task-title']}>{taskData.title}</span>
         <Badge text={taskData.priority} color={getColor(taskData.priority)}></Badge>
