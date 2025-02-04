@@ -1,3 +1,7 @@
+.task-dragging {
+  visibility: hidden;
+}
+
 .task {
   display: flex;
   flex-direction: column;
@@ -5,7 +9,6 @@
   border: 1px solid #c7c3d4;
   border-radius: 1rem;
   padding: 1rem 1.5rem;
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 10%);
   font-size: 0.75rem;
   background-color: var(--background-task);
   transition: 0.2s all ease;
@@ -13,7 +16,6 @@
 }
 
 .task:hover {
-  box-shadow: 0 0 6px 1px rgba(0, 0, 0, 20%);
   transform: scale(1.01);
 }
 
