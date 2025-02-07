@@ -27,7 +27,7 @@ describe('SideBar', () => {
     const sideBar = screen.getByTestId('sidebar');
     const sideBarChildren = screen.getByText('SideBar');
     const sideBarTitle = screen.getByText('SideBarTitle');
-    const sideBarCloseButton = screen.getByTestId('button');
+    const sideBarCloseButton = screen.getByTestId('close-button');
     const sideBarTitleDiv = screen.getByTestId('sidebar-title');
     const sideBarContentDiv = screen.getByTestId('sidebar-content');
 
