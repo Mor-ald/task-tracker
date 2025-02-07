@@ -2,7 +2,7 @@ import styles from './Tab.module.scss';
 import ITab from './ITab';
 
 import Container from '../container/Container';
-import TaskCard from '../task/Task';
+import TaskCard from '../task/TaskCard';
 import PlusButton from '../button/plus-button/PlusButton';
 import MenuButton from '../button/menu-button/MenuButton';
 
@@ -66,7 +66,7 @@ export default function Tab({ title, status, createTaskButtonVisible }: ITab) {
     if (!isLoading)
       return (
         <div className={styles['tab-content']}>
-          {data && data.map((task) => <TaskCard taskData={task} />)}
+          {data && data.map((task) => <TaskCard data={task} />)}
         </div>
       );
 

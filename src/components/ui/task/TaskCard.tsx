@@ -1,5 +1,5 @@
-import styles from './Task.module.scss';
-import ITask from './ITask';
+import styles from './TaskCard.module.scss';
+import ITaskCard from './ITaskCard';
 
 import Badge from '../badge/Badge';
 import { onSetNewCurrentTitle, toggleSideBar } from '../sidebar/SideBarSlice';
@@ -13,9 +13,9 @@ import { TaskPriority } from '@/types/Tasks';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 
 /**
- * Task component
+ * TaskCard component
  */
-export default function Task({ taskData }: ITask) {
+export default function TaskCard({ data }: ITaskCard) {
   const dispatch = useAppDispatch();
   const open = useAppSelector((store) => store.sidebar.open);
   const [dragging, setDragging] = useState<boolean>(false);
@@ -27,11 +27,11 @@ export default function Task({ taskData }: ITask) {
 
     return draggable({
       element: el,
-      getInitialData: () => ({ location, taskData }),
+      getInitialData: () => ({ location, data }),
       onDragStart: () => setDragging(true),
       onDrop: () => setDragging(false),
     });
-  }, [taskData]);
+  }, [data]);
 
   const getColor = (priority: TaskPriority) => {
     switch (priority) {
@@ -52,10 +52,8 @@ export default function Task({ taskData }: ITask) {
       dispatch(onSetNewCurrentTitle({ title: 'Редактирование задачи' }));
       dispatch(
         onSetTask({
-          ...taskData,
-          deadline: taskData.deadline
-            ? taskData.deadline.split('-').reverse().join('-')
-            : taskData.deadline,
+          ...data,
+          deadline: data.deadline ? data.deadline.split('-').reverse().join('-') : data.deadline,
         }),
       );
       dispatch(toggleSideBar());
@@ -69,28 +67,28 @@ export default function Task({ taskData }: ITask) {
       onDoubleClick={onDoubleClick}
     >
       <div className={styles['task-header']}>
-        <span className={styles['task-title']}>{taskData.title}</span>
-        <Badge text={taskData.priority} color={getColor(taskData.priority)}></Badge>
+        <span className={styles['task-title']}>{data.title}</span>
+        <Badge text={data.priority} color={getColor(data.priority)}></Badge>
       </div>
-      <div className={styles['task-description']}>{taskData.description}</div>
+      <div className={styles['task-description']}>{data.description}</div>
 
       <div className={styles['task-created']}>
         <span>Создана:</span>
-        <span>{taskData.created}</span>
+        <span>{data.created}</span>
       </div>
 
-      {taskData.deadline && (
+      {data.deadline && (
         <div className={styles['task-deadline']}>
           <span>Дедлайн:</span>
-          <span>{taskData.deadline}</span>
+          <span>{data.deadline}</span>
         </div>
       )}
 
-      {taskData.tags.length !== 0 && (
+      {data.tags.length !== 0 && (
         <>
           <div className={styles['task-text']}>#Тэги</div>
           <div className={styles['task-tags']}>
-            {taskData.tags.map((tag, i) => (
+            {data.tags.map((tag, i) => (
               <Badge key={i} text={tag.name} color={tag.color} />
             ))}
           </div>
