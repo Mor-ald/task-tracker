@@ -18,7 +18,7 @@ export default function CloseButton() {
   };
 
   return (
-    <div className={styles['button']} data-testid="button" onClick={onClick}>
+    <div className={styles['button']} data-testid="close-button" onClick={onClick}>
       <CloseIcon />
     </div>
   );

@@ -7,7 +7,7 @@ import MenuCircleIcon from '../../icons/MenuCircleIcon';
  */
 export default function MenuButton() {
   return (
-    <div className={styles['button']} data-testid="button">
+    <div className={styles['button']} data-testid="menu-button">
       <MenuCircleIcon />
     </div>
   );

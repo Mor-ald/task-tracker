@@ -22,7 +22,7 @@ export default function PlusButton() {
   };
 
   return (
-    <div className={styles['button']} data-testid="button" onClick={onClick}>
+    <div className={styles['button']} data-testid="plus-button" onClick={onClick}>
       <PlusCircleIcon />
     </div>
   );

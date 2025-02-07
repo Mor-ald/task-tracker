@@ -21,7 +21,7 @@ describe('CloseButton', () => {
 
     render(<CloseButton />);
 
-    const closeButton = screen.getByTestId('button');
+    const closeButton = screen.getByTestId('close-button');
 
     expect(closeButton).toBeInTheDocument();
     expect(closeButton).toHaveClass('button');
@@ -34,7 +34,7 @@ describe('CloseButton', () => {
 
     render(<CloseButton />);
 
-    const closeButton: HTMLDivElement = screen.getByTestId('button');
+    const closeButton: HTMLDivElement = screen.getByTestId('close-button');
 
     expect(closeButton).toBeInTheDocument();
     expect(closeButton).toHaveClass('button');

@@ -17,7 +17,7 @@ describe('PlusButton', () => {
   it('Renders correctly', () => {
     render(<PlusButton />);
 
-    const plusButton = screen.getByTestId('button');
+    const plusButton = screen.getByTestId('plus-button');
 
     expect(plusButton).toBeInTheDocument();
     expect(plusButton).toHaveClass('button');
@@ -34,7 +34,7 @@ describe('PlusButton', () => {
 
     render(<PlusButton />);
 
-    const plusButton: HTMLDivElement = screen.getByTestId('button');
+    const plusButton: HTMLDivElement = screen.getByTestId('plus-button');
 
     expect(plusButton).toBeInTheDocument();
     expect(plusButton).toHaveClass('button');
