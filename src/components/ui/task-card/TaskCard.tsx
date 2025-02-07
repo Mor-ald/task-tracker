@@ -64,6 +64,7 @@ export default function TaskCard({ data }: ITaskCard) {
     <div
       className={styles[dragging ? 'task-dragging' : 'task']}
       ref={ref}
+      data-testid="task-card"
       onDoubleClick={onDoubleClick}
     >
       <div className={styles['task-header']}>
