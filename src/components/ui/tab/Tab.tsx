@@ -65,8 +65,8 @@ export default function Tab({ title, status, createTaskButtonVisible }: ITab) {
   const Tasks = useCallback(() => {
     if (!isLoading)
       return (
-        <div className={styles['tab-content']}>
-          {data && data.map((task) => <TaskCard data={task} />)}
+        <div className={styles['tab-content']} data-testid="tab-content">
+          {data && data.map((task) => <TaskCard key={task.id} data={task} />)}
         </div>
       );
 
