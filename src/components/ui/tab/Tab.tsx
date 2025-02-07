@@ -2,7 +2,7 @@ import styles from './Tab.module.scss';
 import ITab from './ITab';
 
 import Container from '../container/Container';
-import TaskCard from '../task/TaskCard';
+import TaskCard from '../task-card/TaskCard';
 import PlusButton from '../button/plus-button/PlusButton';
 import MenuButton from '../button/menu-button/MenuButton';
 
