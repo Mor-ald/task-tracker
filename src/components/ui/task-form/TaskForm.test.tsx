@@ -264,7 +264,6 @@ describe('TaskForm', () => {
       mockedUseAppDispatch.mockReturnValue(mockDispatch);
 
       mockDispatch.mockImplementation((action) => {
-        console.log(action);
         switch (action.type) {
           case 'taskForm/onChangeTagName':
             return (mockState.currentTagToAdd.name += action.payload.name);
