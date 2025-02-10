@@ -84,4 +84,6 @@ export const {
   onRemoveTag,
 } = taskFromSlice.actions;
 
+export type TaskFormStore = ReturnType<typeof taskFromSlice.getInitialState>;
+
 export default taskFromSlice.reducer;
