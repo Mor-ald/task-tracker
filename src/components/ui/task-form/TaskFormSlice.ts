@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { Task } from '@/types/Tasks';
 
-const initialMode: 'add' | 'edit' | null = null;
+const initialMode: 'add' | 'edit' = 'add';
 
 const initialStateTask: Task = {
   id: 0,
