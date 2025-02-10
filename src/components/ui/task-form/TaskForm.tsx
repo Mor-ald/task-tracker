@@ -23,59 +23,67 @@ import createDate from '@/utils/createDate';
 
 export default function TaskForm() {
   const dispatch = useAppDispatch();
+  const { mode, task, currentTagToAdd } = useAppSelector((store) => store.formTask);
   const [addTask] = useAddTaskMutation();
   const [updateTask] = useUpdateTaskMutation();
-
-  const { mode, task, currentTagToAdd } = useAppSelector((store) => store.formTask);
   const minDeadLineDate = createDate(new Date()).split('-').reverse().join('-');
 
-  const addNewTask = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const addNewTask = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    addTask({
-      title: task.title,
-      description: task.description,
-      type: task.type,
-      status: task.status,
-      created: task.created ? task.created : createDate(new Date()),
-      deadline: task.deadline ? task.deadline.split('-').reverse().join('-') : null,
-      priority: task.priority,
-      tags: task.tags,
-    });
+      addTask({
+        title: task.title,
+        description: task.description,
+        type: task.type,
+        status: task.status,
+        created: task.created ? task.created : createDate(new Date()),
+        deadline: task.deadline ? task.deadline.split('-').reverse().join('-') : null,
+        priority: task.priority,
+        tags: task.tags,
+      });
 
-    dispatch(onClearTask());
-    dispatch(toggleSideBar());
-  };
+      dispatch(onClearTask());
+      dispatch(toggleSideBar());
+    },
+    [addTask, dispatch, task],
+  );
 
-  const updateCurrentTask = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const updateCurrentTask = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    updateTask({
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      type: task.type,
-      status: task.status,
-      created: task.created,
-      deadline: task.deadline ? task.deadline.split('-').reverse().join('-') : null,
-      priority: task.priority,
-      tags: task.tags,
-    });
+      updateTask({
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        type: task.type,
+        status: task.status,
+        created: task.created,
+        deadline: task.deadline ? task.deadline.split('-').reverse().join('-') : null,
+        priority: task.priority,
+        tags: task.tags,
+      });
 
-    dispatch(onClearTask());
-    dispatch(toggleSideBar());
-  };
+      dispatch(onClearTask());
+      dispatch(toggleSideBar());
+    },
+    [dispatch, task, updateTask],
+  );
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (mode === 'add') return addNewTask(e);
-    if (mode === 'edit') return updateCurrentTask(e);
-  };
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      if (mode === 'add') return addNewTask(e);
+      if (mode === 'edit') return updateCurrentTask(e);
+    },
+    [addNewTask, mode, updateCurrentTask],
+  );
 
-  const addNewTag = () => {
+  const addNewTag = useCallback(() => {
     if (currentTagToAdd.name && task.tags.length < 11) {
       dispatch(onAddNewTag({ name: currentTagToAdd.name, color: currentTagToAdd.color }));
     }
-  };
+  }, [currentTagToAdd.color, currentTagToAdd.name, dispatch, task.tags.length]);
 
   const Tags = useCallback(() => {
     return (
@@ -86,6 +94,7 @@ export default function TaskForm() {
             <span
               className={styles['tag-close']}
               style={{ filter: 'invert(100%)' }}
+              data-testid="tag-close"
               onClick={() => dispatch(onRemoveTag({ name: tag.name }))}
             >
               <CloseIcon />
@@ -97,8 +106,8 @@ export default function TaskForm() {
   }, [dispatch, task.tags]);
 
   return (
-    <div className={styles['task-form']}>
-      <form onSubmit={onSubmit}>
+    <div className={styles['task-form']} data-testid="task-form">
+      <form data-testid="form" onSubmit={onSubmit}>
         <div>
           <div className={styles['task-block']}>
             <label htmlFor="task-title">Название задачи</label>
@@ -129,6 +138,7 @@ export default function TaskForm() {
               id="task-type"
               required
               value={task.type}
+              data-testid="task-type-select"
               onChange={(e) => dispatch(onChangeType({ type: e.target.value }))}
             >
               <option value={'task'}>Задача</option>
@@ -145,6 +155,7 @@ export default function TaskForm() {
               id="task-priority"
               required
               value={task.priority}
+              data-testid="task-priority-select"
               onChange={(e) => dispatch(onChangePriority({ priority: e.target.value }))}
             >
               <option value={'low'}>Низкая</option>
@@ -158,6 +169,7 @@ export default function TaskForm() {
             <input
               id="task-deadline"
               type="date"
+              placeholder="01-01-2025"
               min={minDeadLineDate}
               value={task.deadline!}
               onChange={(e) => dispatch(onChangeDeadLine({ deadline: e.target.value }))}
@@ -173,6 +185,7 @@ export default function TaskForm() {
                 <input
                   id="task-tag-name"
                   type="text"
+                  placeholder="#Тэг"
                   maxLength={20}
                   value={currentTagToAdd.name}
                   onChange={(e) => dispatch(onChangeTagName({ name: e.target.value }))}
@@ -184,6 +197,7 @@ export default function TaskForm() {
                   id="task-tag-name"
                   type="color"
                   className={styles['task-pick-color']}
+                  data-testid="task-tag-name"
                   value={currentTagToAdd.color}
                   onChange={(e) => dispatch(onPickTagColor({ color: e.target.value }))}
                 />
