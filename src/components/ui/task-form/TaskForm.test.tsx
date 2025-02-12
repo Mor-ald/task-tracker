@@ -363,11 +363,16 @@ describe('TaskForm', () => {
       });
 
       const { rerender } = render(<TaskForm />);
+
       const mockedOnClearTask = jest.spyOn(taskFormActions, 'onClearTask');
       const mockedToggleSideBar = jest.spyOn(sideBarActions, 'toggleSideBar');
-      const saveButton = screen.getByRole('button');
+      const saveButton = screen.getByText('Сохранить');
 
-      fireEvent.click(saveButton);
+      fireEvent.submit(saveButton);
+
+      expect(mockAddTask).toHaveBeenCalledTimes(1);
+      expect(mockedOnClearTask).toHaveBeenCalled();
+      expect(mockedToggleSideBar).toHaveBeenCalled();
 
       rerender(<TaskForm />);
 
@@ -379,9 +384,6 @@ describe('TaskForm', () => {
       const taskTagNameInput = screen.getByPlaceholderText('#Тэг');
       const taskPickColorInput = screen.getByTestId('task-tag-name');
 
-      expect(mockAddTask).toHaveBeenCalledTimes(1);
-      expect(mockedOnClearTask).toHaveBeenCalled();
-      expect(mockedToggleSideBar).toHaveBeenCalled();
       expect(taskTitleInput).toHaveValue('');
       expect(taskDescriptionInput).toHaveValue('');
       expect(taskTypeSelect).toHaveValue('task');
@@ -390,71 +392,72 @@ describe('TaskForm', () => {
       expect(taskTagNameInput).toHaveValue('');
       expect(taskPickColorInput).toHaveValue('#000000');
     });
-  });
 
-  it('Clear after save edited task', async () => {
-    const mockState: FormTaskData = {
-      mode: 'edit',
-      task: {
-        title: 'New title',
-        description: 'New desc',
-        type: 'feature',
-        status: 'to-do',
-        created: createDate(new Date()),
-        deadline: '2025-02-10',
-        priority: 'medium',
-        tags: [{ name: 'New tag', color: '#333333' }],
-        id: '',
-      },
-      currentTagToAdd: { name: '', color: '#000000' },
-    };
+    it('Clear after save edited task', async () => {
+      const mockState: FormTaskData = {
+        mode: 'edit',
+        task: {
+          title: 'New title',
+          description: 'New desc',
+          type: 'feature',
+          status: 'to-do',
+          created: createDate(new Date()),
+          deadline: '2025-02-10',
+          priority: 'medium',
+          tags: [{ name: 'New tag', color: '#333333' }],
+          id: '',
+        },
+        currentTagToAdd: { name: '', color: '#000000' },
+      };
 
-    mockedUseAppSelector.mockReturnValue(mockState);
-    mockedUseAppDispatch.mockReturnValue(mockDispatch);
+      mockedUseAppSelector.mockReturnValue(mockState);
+      mockedUseAppDispatch.mockReturnValue(mockDispatch);
 
-    mockDispatch.mockImplementation((action) => {
-      switch (action.type) {
-        case 'taskForm/onClearTask':
-          return (mockState.task = {
-            title: '',
-            description: '',
-            type: 'task',
-            status: 'to-do',
-            created: createDate(new Date()),
-            deadline: '',
-            priority: 'low',
-            tags: [],
-            id: '',
-          });
-      }
+      mockDispatch.mockImplementation((action) => {
+        switch (action.type) {
+          case 'taskForm/onClearTask':
+            return (mockState.task = {
+              title: '',
+              description: '',
+              type: 'task',
+              status: 'to-do',
+              created: createDate(new Date()),
+              deadline: '',
+              priority: 'low',
+              tags: [],
+              id: '',
+            });
+        }
+      });
+
+      const { rerender } = render(<TaskForm />);
+      const mockedOnClearTask = jest.spyOn(taskFormActions, 'onClearTask');
+      const mockedToggleSideBar = jest.spyOn(sideBarActions, 'toggleSideBar');
+      const saveButton = screen.getByText('Сохранить');
+
+      fireEvent.submit(saveButton);
+
+      expect(mockUpdateTask).toHaveBeenCalledTimes(1);
+      expect(mockedOnClearTask).toHaveBeenCalled();
+      expect(mockedToggleSideBar).toHaveBeenCalled();
+
+      rerender(<TaskForm />);
+
+      const taskTitleInput = screen.getByPlaceholderText('Тестовая задача');
+      const taskDescriptionInput = screen.getByPlaceholderText('Описание вашей прекрасной задачи');
+      const taskTypeSelect = screen.getByTestId('task-type-select');
+      const taskPrioritySelect = screen.getByTestId('task-priority-select');
+      const taskDeadLineInput = screen.getByPlaceholderText('01-01-2025');
+      const taskTagNameInput = screen.getByPlaceholderText('#Тэг');
+      const taskPickColorInput = screen.getByTestId('task-tag-name');
+
+      expect(taskTitleInput).toHaveValue('');
+      expect(taskDescriptionInput).toHaveValue('');
+      expect(taskTypeSelect).toHaveValue('task');
+      expect(taskPrioritySelect).toHaveValue('low');
+      expect(taskDeadLineInput).toHaveValue('');
+      expect(taskTagNameInput).toHaveValue('');
+      expect(taskPickColorInput).toHaveValue('#000000');
     });
-
-    const { rerender } = render(<TaskForm />);
-    const mockedOnClearTask = jest.spyOn(taskFormActions, 'onClearTask');
-    const mockedToggleSideBar = jest.spyOn(sideBarActions, 'toggleSideBar');
-    const saveButton = screen.getByRole('button');
-
-    fireEvent.click(saveButton);
-
-    rerender(<TaskForm />);
-
-    const taskTitleInput = screen.getByPlaceholderText('Тестовая задача');
-    const taskDescriptionInput = screen.getByPlaceholderText('Описание вашей прекрасной задачи');
-    const taskTypeSelect = screen.getByTestId('task-type-select');
-    const taskPrioritySelect = screen.getByTestId('task-priority-select');
-    const taskDeadLineInput = screen.getByPlaceholderText('01-01-2025');
-    const taskTagNameInput = screen.getByPlaceholderText('#Тэг');
-    const taskPickColorInput = screen.getByTestId('task-tag-name');
-
-    expect(mockUpdateTask).toHaveBeenCalledTimes(1);
-    expect(mockedOnClearTask).toHaveBeenCalled();
-    expect(mockedToggleSideBar).toHaveBeenCalled();
-    expect(taskTitleInput).toHaveValue('');
-    expect(taskDescriptionInput).toHaveValue('');
-    expect(taskTypeSelect).toHaveValue('task');
-    expect(taskPrioritySelect).toHaveValue('low');
-    expect(taskDeadLineInput).toHaveValue('');
-    expect(taskTagNameInput).toHaveValue('');
-    expect(taskPickColorInput).toHaveValue('#000000');
   });
 });
