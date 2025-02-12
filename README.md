@@ -68,3 +68,9 @@ npm install
 ```
 npm run dev
 ```
+
+Запуск тестов
+
+```
+npm run test
+```
